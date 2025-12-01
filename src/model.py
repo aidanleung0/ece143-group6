@@ -1,4 +1,5 @@
 import numpy as np
+import pickle
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
@@ -124,3 +125,25 @@ class PredictionModel:
             model=self.model, numeric_features=self.numeric_features, categorical_features=self.categorical_features
         )
         return features, importance
+
+    def save_model(self, path):
+        assert self.model is not None, "Model not fit"
+        assert self.model_name is not None, "Model not fit"
+        with open(path, 'wb') as f:
+            pickle.dump({
+                'model': self.model,
+                'model_name': self.model_name,
+                'numeric_features': self.numeric_features,
+                'categorical_features': self.categorical_features
+            }, f)
+
+    @classmethod
+    def load_model(cls, path):
+        with open(path, 'rb') as f:
+            data = pickle.load(f)
+        instance = cls(candidates=[data['model_name']])
+        instance.model = data['model']
+        instance.model_name = data['model_name']
+        instance.numeric_features = data['numeric_features']
+        instance.categorical_features = data['categorical_features']
+        return instance

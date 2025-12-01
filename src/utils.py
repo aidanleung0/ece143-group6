@@ -64,7 +64,7 @@ def build_from_sm_emo_df(df):
     tmp["happiness_index"] = df["Dominant_Emotion"].map(emotion_map)
     tmp["stress_level"] = np.nan
     tmp["platform"] = df["Platform"]
-    return
+    return tmp
 
 def convert_age(x):
     try:

@@ -15,8 +15,17 @@ This project implements a Mental Health & Social Media Analysis
   * this contains the utility function for the project
 
 ## Usage
+
 To set up the environment, we need
 `pip install -r requirements.txt`
 
 * final.ipynb: it includes the whole pipeline: from data preprocessing to model fitting to visualization.
 * analyzer_app.py: this one include a recommendation app. By running `python analyzer_app.py`, the user can input the data features and get the estimate of their stress level and hapiness index based on the inputs.
+
+## Third-Party Module
+
+* pandas
+* numpy
+* scikit-learn
+* xgboost
+* matplotlib

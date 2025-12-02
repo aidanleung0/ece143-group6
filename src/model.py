@@ -19,6 +19,16 @@ models = {
 }
 
 def get_feature_names_from_pipeline(model, numeric_features, categorical_features):
+    """
+    This is the function for getting the features name from the pipeline (which is our sklearn model)
+    :model: the model pipeline
+    :numeric_features: the numeric features name (like age, sleep time, ...)
+    :categorical_features: the categorical features name (like gender)
+    """
+    assert model is not None
+    assert type(numeric_features) is list
+    assert type(categorical_features) is list
+
     preprocessor = model.named_steps["preprocessor"]
 
     # numeric names are just the original columns
@@ -70,7 +80,14 @@ importance_function = {
 }
 
 class PredictionModel:
+    """
+    This is the prediction model wrapper. It would wrap multiple model for fitting and select the best one.
+    """
     def __init__(self, candidates: list[str]):
+        """
+        constructor
+        :candidates: list of model architecture candidates 
+        """
         for candidate in candidates:
             assert candidate in models, f"{candidate} is not supported"
         self.candidates = candidates
@@ -113,10 +130,17 @@ class PredictionModel:
         return best_model
 
     def predict(self, X_test):
+        """
+        This function would use the best model to regress
+        :X_test: test features data
+        """
         assert self.model is not None, "Model not fit"
         return self.model.predict(X_test)
 
     def get_importance(self):
+        """
+        This would be the function to return the importances score (normalized to 0 to 1)
+        """
         assert self.model_name is not None, "Model not fit"
         assert self.model is not None, "Model not fit"
 
@@ -127,6 +151,10 @@ class PredictionModel:
         return features, importance
 
     def save_model(self, path):
+        """
+        This function would save the model to a given path
+        :path: the save path
+        """
         assert self.model is not None, "Model not fit"
         assert self.model_name is not None, "Model not fit"
         with open(path, 'wb') as f:
@@ -139,6 +167,10 @@ class PredictionModel:
 
     @classmethod
     def load_model(cls, path):
+        """
+        This function would load the model from a given path
+        :path: the load path
+        """
         with open(path, 'rb') as f:
             data = pickle.load(f)
         instance = cls(candidates=[data['model_name']])

@@ -3,6 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def plot_age_v_stress(df):
+    """
+    This function would plot the visualization between age versus stress
+    :df: the input dataset which is a dataframe
+    """
+    assert type(df) == pd.DataFrame
     df["age_group"] = pd.cut(
         df["age"],
         bins=[0, 17, 24, 34, 44, 60, 120],
@@ -29,6 +34,12 @@ def plot_age_v_stress(df):
     plt.show()
 
 def plot_screen_time_v_stress(df):
+    """
+    This function would plot the visualization between screen time versus stress
+    :df: the input dataset which is a dataframe
+    """
+    assert type(df) == pd.DataFrame
+    assert type(df) == pd.DataFrame
     clean_df = df.dropna(subset=["screen_time_hours", "stress_level"])
 
     plt.figure(figsize=(8, 4))
@@ -41,6 +52,11 @@ def plot_screen_time_v_stress(df):
     plt.show()
 
 def plot_screen_time_v_happiness(df):
+    """
+    This function would plot the visualization between age versus happiness
+    :df: the input dataset which is a dataframe
+    """
+    assert type(df) == pd.DataFrame
     clean_df = df.dropna(subset=["screen_time_hours", "happiness_index"])
 
     plt.figure(figsize=(8, 4))
@@ -53,6 +69,11 @@ def plot_screen_time_v_happiness(df):
     plt.show()
 
 def plot_sleep_v_stress(df):
+    """
+    This function would plot the visualization between sleep time versus stress
+    :df: the input dataset which is a dataframe
+    """
+    assert type(df) == pd.DataFrame
     clean_df = df.dropna(subset=["sleep_hours", "stress_level"])
 
     plt.figure(figsize=(8, 4))
@@ -65,6 +86,11 @@ def plot_sleep_v_stress(df):
     plt.show()
 
 def plot_exercise_v_stress(df):
+    """
+    This function would plot the visualization between exercise frequency versus stress
+    :df: the input dataset which is a dataframe
+    """
+    assert type(df) == pd.DataFrame
     clean_df = df.dropna(subset=["exercise_freq", "stress_level"])
 
     plt.figure(figsize=(8, 4))
@@ -77,6 +103,11 @@ def plot_exercise_v_stress(df):
     plt.show()
 
 def plot_platform_analysis(df):
+    """
+    This function would plot the visualization that reveals platform influence on stress level and happiness index
+    :df: the input dataset which is a dataframe
+    """
+    assert type(df) == pd.DataFrame
     platform_df = df.dropna(subset=["platform"])
     platform_df = platform_df.groupby("platform")[["stress_level", "happiness_index"]].mean()
 
@@ -91,6 +122,13 @@ def plot_platform_analysis(df):
     plt.show()
 
 def plot_true_v_pred(y_true, y_pred, target):
+    """
+    This function would plot the visualization of model performance
+    :ytrue: ground truth value
+    :y_pred: the predicted value
+    :target: either "stress_level" or "happiness_index"
+    """
+    assert target in ["stress_level", "happiness_index"]
     plt.figure(figsize=(6, 6))
     plt.scatter(y_true, y_pred, alpha=0.5)
     plt.xlabel("True")
@@ -104,6 +142,13 @@ def plot_true_v_pred(y_true, y_pred, target):
     plt.show()
 
 def plot_residual_distribution(y_true, y_pred, target):
+    """
+    This function would plot the visualization of model performance by checking residuals
+    :ytrue: ground truth value
+    :y_pred: the predicted value
+    :target: either "stress_level" or "happiness_index"
+    """
+    assert target in ["stress_level", "happiness_index"]
     residuals = y_true - y_pred
 
     plt.figure(figsize=(7, 5))
@@ -116,6 +161,11 @@ def plot_residual_distribution(y_true, y_pred, target):
     plt.show()
 
 def plot_feature_importances(feature_names, importances, title="Feature Importances"):
+    """
+    This function is used to visualize the importance for each feature
+    :feature_names: the feature names
+    :importances: the importance score
+    """
     sorted_idx = np.argsort(importances)
 
     plt.figure(figsize=(8, 6))

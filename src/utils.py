@@ -2,6 +2,11 @@ import pandas as pd
 import numpy as np
 
 def build_from_stress_df(df):
+    """
+    Returns a processed and cleaned DataFrame from the stress level detection dataset.
+    """
+    assert isinstance(df, pd.DataFrame)
+
     tmp = pd.DataFrame()
     tmp["age"] = df["Age"]
     tmp["gender"] = df["Gender"]
@@ -23,6 +28,11 @@ def build_from_stress_df(df):
 
 
 def build_from_mh_df(df):
+    """
+    Returns a processed and cleaned DataFrame from the mental health dataset.
+    """
+    assert isinstance(df, pd.DataFrame)
+    
     tmp = pd.DataFrame()
     tmp["age"] = df["age"]
     tmp["gender"] = df["gender"]
@@ -39,6 +49,11 @@ def build_from_mh_df(df):
 
 
 def build_from_sm_balance_df(df):
+    """
+    Returns a processed and cleaned DataFrame from the mental health and social media balance dataset.
+    """
+    assert isinstance(df, pd.DataFrame)
+
     tmp = pd.DataFrame()
     tmp["age"] = df["Age"]
     tmp["gender"] = df["Gender"]
@@ -52,6 +67,11 @@ def build_from_sm_balance_df(df):
 
 
 def build_from_sm_emo_df(df):
+    """
+    Returns a processed and cleaned DataFrame from the social media and emotions dataset.
+    """
+    assert isinstance(df, pd.DataFrame)
+
     tmp = pd.DataFrame()
     tmp["age"] = df["Age"]
     tmp["gender"] = df["Gender"]
@@ -67,6 +87,9 @@ def build_from_sm_emo_df(df):
     return tmp
 
 def convert_age(x):
+    """
+    Helper function to process age ranges.
+    """
     try:
         return float(x)
     except:

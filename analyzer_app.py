@@ -6,6 +6,9 @@ from src.dataset import Dataset
 from src.model import PredictionModel
 
 def load_and_preprocess_data():
+    """
+    Helper function that compiles the four datasets into one cleaned dataframe.
+    """
     stress_df = pd.read_csv("data/Stress Level Detection Based on Daily Activities.csv")
     mh_df = pd.read_csv("data/mental_health_dataset.csv")
     sm_balance_df = pd.read_csv("data/Mental_Health_and_Social_Media_Balance_Dataset.csv")
@@ -35,6 +38,9 @@ def load_and_preprocess_data():
     return df
 
 def get_user_input():
+    """
+    Helper function that grabs the user's information, including age, gender, screen time, sleep hours, and exercise frequency.
+    """
     print("Please enter the following information:\n")
 
     while True:
@@ -88,6 +94,9 @@ def get_user_input():
     })
 
 def main():
+    """
+    CLI app that trains the model, takes in user inputs, then predicts your stress and happiness.
+    """
     model_path = "model.pkl"
 
     if os.path.exists(model_path):
